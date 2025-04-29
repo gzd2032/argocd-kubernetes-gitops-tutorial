@@ -16,7 +16,6 @@ spec:
         - name: mongodb
           imagePullPolicy: Never
           image: mongodb:5.0.10
-          imagePullPolicy: Always
           env:
             - name: MONGODB_SYSTEM_LOG_VERBOSITY
               value: "0"
