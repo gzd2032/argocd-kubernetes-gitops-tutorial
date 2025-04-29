@@ -6,6 +6,9 @@ spec:
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: mongodb
     spec:
       securityContext:
         runAsNonRoot: true
