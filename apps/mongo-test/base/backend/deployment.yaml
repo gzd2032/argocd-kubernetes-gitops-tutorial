@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: nginx
   namespace: mongo-test
   labels:
-    app: mongodb
+    app: nginx
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: mongodb
+      app: nginx
   template:
     metadata:
       labels:
-        app: mongodb
+        app: nginx
     spec:
       containers:
-        - name: mongodb
-          image: arm64v8/mongo:4.0.10
+        - name: nginx
+          image: nginx
           ports:
-            - containerPort: 27017
+            - containerPort: 80
