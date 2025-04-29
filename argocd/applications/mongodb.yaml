@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/gzd2032/argocd-kubernetes-gitops-tutorial.git
     targetRevision: HEAD
-    path: uplink/mongodb/overlays/dev
+    path: uplink/mongo/overlays/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: uplink
