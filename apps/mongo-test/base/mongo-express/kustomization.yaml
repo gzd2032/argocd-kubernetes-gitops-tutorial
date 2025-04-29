@@ -4,3 +4,9 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+
+patches:
+  - path: replicas-patch.yaml
+    target:
+      kind: Deployment
+      name: mongo-express
