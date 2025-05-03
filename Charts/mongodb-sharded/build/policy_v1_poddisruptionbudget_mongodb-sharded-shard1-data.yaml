@@ -1,0 +1,20 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    app.kubernetes.io/component: shardsvr
+    app.kubernetes.io/instance: mongodb-sharded
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mongodb-sharded
+    app.kubernetes.io/version: 7.0.9
+    helm.sh/chart: mongodb-sharded-8.0.8
+  name: mongodb-sharded-shard1-data
+  namespace: mongo-sharded
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: shardsvr
+      app.kubernetes.io/instance: mongodb-sharded
+      app.kubernetes.io/name: mongodb-sharded
+      shard: "1"
