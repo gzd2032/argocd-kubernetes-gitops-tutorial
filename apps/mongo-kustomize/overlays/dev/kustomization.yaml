@@ -8,7 +8,7 @@ namePrefix: ""
 nameSuffix: ""
 
 patches:
-  - path: namespace-patch.yaml
+  - path: ../patches/namespace-patch.yaml
     target:
       kind: Deployment
       name: release-name-mongodb-sharded-mongos
