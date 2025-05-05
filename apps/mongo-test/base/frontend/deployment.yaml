@@ -23,12 +23,13 @@ spec:
             - /bin/sh
             - -c
             - |
+              sudo apt-get install -y mongodb-mongosh
               export USERNAME=$(MONGO_INITDB_ROOT_USERNAME) 
               export PHRASE=$(MONGO_INITDB_ROOT_PASSWORD) 
               export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
               echo 'Set FeatureCompatibility Version...' 
-              echo '--authenticationDatabase admin' | mongosh --verbose '${MONGO_CONNECTION_STRING}/$(MONGO_INITDB_DATABASE)?authSource=admin' 
+              echo '--authenticationDatabase admin' | mongosh --verbose '${MONGO_CONNECTION_STRING}/admin?authSource=admin' 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/$(MONGO_INITDB_DATABASE)?authSource=admin 
               sleep 5 
               echo 'Veriy FeatureCompatibility Version...' 
