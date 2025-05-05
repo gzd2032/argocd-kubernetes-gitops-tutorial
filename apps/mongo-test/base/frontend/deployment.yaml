@@ -28,7 +28,7 @@ spec:
               export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
               echo 'Set FeatureCompatibility Version...' 
-              echo 'db.stats()' | mongosh --verbose '${MONGO_CONNECTION_STRING}/authSource=admin' 
+              echo 'db.adminCommand( { listDatabases: 1})' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               sleep 5 
               echo 'Veriy FeatureCompatibility Version...' 
