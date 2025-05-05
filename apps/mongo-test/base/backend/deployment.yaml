@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: backend
-          image: alpine
+          image: arm64v8/alpine
           ports:
             - containerPort: 80
