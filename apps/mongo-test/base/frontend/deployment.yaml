@@ -17,13 +17,12 @@ spec:
     spec:
       initContainers:
         - name: mongodb-init
-          image: mongo:4.0.10
+          image: alpine/mongosh
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
             - -c
             - |
-              sudo apt-get install -y mongodb-mongosh
               export USERNAME=$(MONGO_INITDB_ROOT_USERNAME) 
               export PHRASE=$(MONGO_INITDB_ROOT_PASSWORD) 
               export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
