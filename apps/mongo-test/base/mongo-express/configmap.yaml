@@ -4,4 +4,4 @@ metadata:
   name: mongo-express-configmap
 data:
   database_url: mongodb-service
-  database_port: 27017
+  database_port: "27017"
