@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: arm64v8/alpine
+          # image: arm64v8/alpine
+          image: nginx
           ports:
             - containerPort: 80
