@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mongodb-test
+  name: grade-submission-dev
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/gzd2032/argocd-kubernetes-gitops-tutorial.git
+    repoURL: https://github.com/rslim087a/argocd-kubernetes-gitops-tutorial.git
     targetRevision: HEAD
-    path: apps/mongo-test/overlays/dev
+    path: apps/mongo-kustmize/overlays/dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: mongo-test
+    namespace: mongo-helm
   syncPolicy:
     automated:
       prune: true

@@ -1,0 +1,7 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-mongodb-sharded-mongos
+  namespace: mongo-helm 
+spec:
+  replicas: 1

@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/rslim087a/argocd-kubernetes-gitops-tutorial.git
     targetRevision: HEAD
-    path: Charts/mongodb-sharded/charts
+    path: Charts/mongodb-sharded/charts/mongodb-sharded-8.0.8/mongodb-sharded/charts/common
     helm:
       valueFiles:
         - values.yaml
