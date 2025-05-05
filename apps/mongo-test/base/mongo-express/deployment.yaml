@@ -24,20 +24,20 @@ spec:
             - name: ME_CONFIG_MONGODB_ADMINUSERNAME
               valueFrom:
                 secretRef:
-                  - name: mongodb-secret
-                    key: mongo-root-username
+                  name: mongodb-secret
+                  key: mongo-root-username
             - name: ME_CONFIG_MONGODB_ADMINPASSWORD
               valueFrom:
                 secretRef:
-                  - name: mongodb-secret
-                    key: mongo-root-password
+                  name: mongodb-secret
+                  key: mongo-root-password
             - name: ME_CONFIG_MONGODB_SERVER
               valueFrom:
                 configMapKeyRef:
-                  - name: mongo-express-configmap
-                    key: database_url
+                  name: mongo-express-configmap
+                  key: database_url
             - name: ME_CONFIG_MONGODB_PORT
               valueFrom:
                 configMapKeyRef:
-                  - name: mongo-express-configmap
-                    key: database_port
+                  name: mongo-express-configmap
+                  key: database_port
