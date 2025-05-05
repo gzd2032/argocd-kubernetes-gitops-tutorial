@@ -23,12 +23,12 @@ spec:
           env:
             - name: ME_CONFIG_MONGODB_ADMINUSERNAME
               valueFrom:
-                secretRef:
+                secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-username
             - name: ME_CONFIG_MONGODB_ADMINPASSWORD
               valueFrom:
-                secretRef:
+                secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
             - name: ME_CONFIG_MONGODB_SERVER
