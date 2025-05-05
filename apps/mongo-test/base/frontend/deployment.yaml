@@ -15,6 +15,45 @@ spec:
       labels:
         app: frontend
     spec:
+      initContainers:
+        - name: mongodb-init
+          image: mongo:4.0.10
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              export USERNAME=$(MONGO_INITDB_ROOT_USERNAME) 
+              export PHRASE=$(MONGO_INITDB_ROOT_PASSWORD) 
+              export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
+              export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
+              echo 'Set FeatureCompatibility Version...' 
+              echo '--authenticationDatabase admin' | mongosh --verbose '${MONGO_CONNECTION_STRING}/$(MONGO_INITDB_DATABASE)?authSource=admin' 
+              echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/$(MONGO_INITDB_DATABASE)?authSource=admin 
+              sleep 5 
+              echo 'Veriy FeatureCompatibility Version...' 
+              echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-express-configmap
+                  key: mongo-root-password
+            - name: MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-express-configmap
+                  key: database_url
+            - name: MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-express-configmap
+                  key: database_port
       containers:
         - name: nginx
           image: nginx
