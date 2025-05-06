@@ -32,7 +32,7 @@ spec:
                 sleep 5
               done
               echo 'Set FeatureCompatibility Version...' 
-              echo 'db.adminCommand({listDatabases: 1})' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
+              echo 'use admin' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               sleep 5 
               echo 'Veriy FeatureCompatibility Version...' 
