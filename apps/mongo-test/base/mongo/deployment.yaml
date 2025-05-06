@@ -32,7 +32,7 @@ spec:
                   name: mongodb-secret
                   key: mongo-root-password
         - name: mongodb-init
-          image: alpine/mongosh
+          image: zwieratko/mongosh
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
