@@ -31,7 +31,7 @@ spec:
               mongosh --verbose <<EOF
                   show dbs
                   db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
-                  ${MONGO_CONNECTION_STRING}  
+                  ${MONGO_CONNECTION_STRING}/?authSource=admin  
               EOF            
               until echo 'db.stats()' | mongosh ${MONGO_CONNECTION_STRING}; do
                 echo 'Waiting for MongoDB to become ready...'
