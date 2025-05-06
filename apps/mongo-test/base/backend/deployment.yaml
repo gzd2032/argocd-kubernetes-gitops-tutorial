@@ -27,16 +27,18 @@ spec:
               export PHRASE=$(MONGO_INITDB_ROOT_PASSWORD) 
               export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
-              until echo 'db.stats()' | mongosh --verbose ${MONGO_CONNECTION_STRING}; do
+              cd 
+              until echo 'db.stats()' | mongosh ${MONGO_CONNECTION_STRING}; do
                 echo 'Waiting for MongoDB to become ready...'
                 sleep 5
               done
-              mongosh show dbs
+              echo 'List of Databases' 
+              echo 'show dbs' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
               echo 'Set FeatureCompatibility Version...' 
-              echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
+              echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
               sleep 5 
               echo 'Verify FeatureCompatibility Version...' 
-              echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
+              echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
