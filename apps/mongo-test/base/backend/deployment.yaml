@@ -31,8 +31,7 @@ spec:
                 echo 'Waiting for MongoDB to become ready...'
                 sleep 5
               done
-              mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
-              show dbs
+              mongosh show dbs
               echo 'Set FeatureCompatibility Version...' 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
               sleep 5 
