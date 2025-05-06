@@ -65,11 +65,12 @@ spec:
                   name: mongo-express-configmap
                   key: database_port
           securityContext:
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
             runAsGroup: 1000
-            runAsUser: 1000
+            runAsUser: 0
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       containers:
