@@ -17,8 +17,7 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: registry1.dso.mil/ironbank/opensource/mongodb/mongodb:5.0.10
-          imagePullPolicy: Never
+          image: mongo:4.0.10
           ports:
             - containerPort: 27017
           env:
