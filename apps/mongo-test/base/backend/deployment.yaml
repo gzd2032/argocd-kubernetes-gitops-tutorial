@@ -31,10 +31,12 @@ spec:
                 echo 'Waiting for MongoDB to become ready...'
                 sleep 5
               done
+              mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
               echo 'Set FeatureCompatibility Version...' 
-              echo 'show dbs && db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
+              echo 'show dbs' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
+              echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
               sleep 5 
-              echo 'Veriy FeatureCompatibility Version...' 
+              echo 'Verify FeatureCompatibility Version...' 
               echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
