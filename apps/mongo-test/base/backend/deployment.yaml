@@ -27,6 +27,10 @@ spec:
               export PHRASE=$(MONGO_INITDB_ROOT_PASSWORD) 
               export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
+              until echo 'db.stats()' | mongosh --verbose ${MONGO_CONNECTION_STRING}; do
+                echo 'Waiting for MongoDB to become ready...'
+                sleep 5
+              done
               echo 'Set FeatureCompatibility Version...' 
               echo 'db.adminCommand({listDatabases: 1})' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
