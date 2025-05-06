@@ -34,10 +34,9 @@ spec:
               echo 'Set FeatureCompatibility Version...' 
               echo 'use admin' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )' 
-              echo 'db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               sleep 5 
               echo 'Veriy FeatureCompatibility Version...' 
-              echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
+              echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' 
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
