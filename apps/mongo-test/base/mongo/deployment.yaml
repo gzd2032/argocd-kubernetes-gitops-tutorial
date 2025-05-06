@@ -31,6 +31,7 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+      initContainers:
         - name: mongodb-init
           image: zwieratko/mongosh
           imagePullPolicy: IfNotPresent
