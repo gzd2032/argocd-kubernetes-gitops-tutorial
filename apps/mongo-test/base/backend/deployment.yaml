@@ -28,11 +28,10 @@ spec:
               export URI="$(MONGODB_HOST):$(MONGODB_PORT)" 
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
               cd 
-              mongosh --verbose <<EOF
+              mongosh --verbose --json=relaxed \
                   --eval 'show dbs' \
                   --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' \
-                  ${MONGO_CONNECTION_STRING}  
-              EOF            
+                  ${MONGO_CONNECTION_STRING}/?authSource=admin              
               until echo 'db.stats()' | mongosh ${MONGO_CONNECTION_STRING}; do
                 echo 'Waiting for MongoDB to become ready...'
                 sleep 5
