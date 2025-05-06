@@ -34,7 +34,6 @@ spec:
               mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
               show dbs
               echo 'Set FeatureCompatibility Version...' 
-              echo 'show dbs' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin
               sleep 5 
               echo 'Verify FeatureCompatibility Version...' 
