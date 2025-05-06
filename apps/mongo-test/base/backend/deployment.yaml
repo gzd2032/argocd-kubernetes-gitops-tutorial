@@ -29,16 +29,18 @@ spec:
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
               cd 
               mongosh --verbose <<EOF
-                  show dbs
-                  db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
-                  ${MONGO_CONNECTION_STRING}/?authSource=admin  
+                  --eval 'show dbs' \
+                  --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' \
+                  ${MONGO_CONNECTION_STRING}  
               EOF            
               until echo 'db.stats()' | mongosh ${MONGO_CONNECTION_STRING}; do
                 echo 'Waiting for MongoDB to become ready...'
                 sleep 5
               done
+              echo 'List of Databases' 
+              echo 'show dbs' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
               echo 'Set FeatureCompatibility Version...' 
-              echo 'show dbs\db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
+              echo 'db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
               sleep 5 
               echo 'Verify FeatureCompatibility Version...' 
               echo 'db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )' | mongosh ${MONGO_CONNECTION_STRING}/?authSource=admin
