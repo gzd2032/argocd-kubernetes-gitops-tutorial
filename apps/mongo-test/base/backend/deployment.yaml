@@ -29,10 +29,10 @@ spec:
               export MONGO_CONNECTION_STRING="mongodb://${USERNAME}:${PHRASE}@${URI}" 
               until echo 'db.stats()' | mongosh --verbose ${MONGO_CONNECTION_STRING}; do
                 echo 'Waiting for MongoDB to become ready...'
+                echo 'use admin' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
                 sleep 5
               done
               echo 'Set FeatureCompatibility Version...' 
-              echo 'use admin' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               echo 'db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )' | mongosh --verbose ${MONGO_CONNECTION_STRING}/?authSource=admin 
               sleep 5 
               echo 'Veriy FeatureCompatibility Version...' 
